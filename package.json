@@ -1,76 +1,48 @@
 {
-  "name": "loaders.gl",
-  "description": "Framework-independent loaders for visualization, 3D graphics and geospatial formats",
+  "name": "@loaders.gl/tiles",
+  "version": "3.4.0",
+  "description": "Common components for different tiles loaders.",
   "license": "MIT",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/visgl/loaders.gl"
   },
   "keywords": [
     "webgl",
-    "loader",
-    "3d",
+    "3d tiles",
+    "tile",
+    "mesh",
+    "gltf",
     "point cloud",
-    "GLB",
-    "OBJ",
-    "PLY",
-    "LAZ",
-    "PCD",
-    "KML"
+    "pointcloud"
   ],
-  "workspaces": [
-    "modules/*"
+  "types": "dist/index.d.ts",
+  "main": "dist/es5/index.js",
+  "module": "dist/esm/index.js",
+  "sideEffects": false,
+  "files": [
+    "src",
+    "dist",
+    "README.md"
   ],
   "scripts": {
-    "bootstrap": "yarn install-fast && ocular-bootstrap",
-    "install-fast": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true yarn",
-    "start": "echo 'Please see loaders.gl website for how to run examples' && open https://loaders.gl/docs",
-    "clean": "ocular-clean && npm run tsclean",
-    "build": "npm run clean && npm run tsbuild && ocular-build --dist es5,esm && lerna run pre-build",
-    "build-workers": "lerna run pre-build",
-    "tsclean": "find . -name tsconfig.tsbuildinfo -exec rm {} \\;",
-    "tsbuild": "tsc -b tsconfig.build.json && scripts/add-js-to-imports.sh",
-    "cover": "ocular-test cover",
-    "lint": "tsc && ocular-lint",
-    "bump": "ocular-bump",
-    "publish": "ocular-publish",
-    "test": "ocular-test",
-    "metrics": "./scripts/metrics.sh && ocular-metrics",
-    "version": "yarn build",
-    "pre-commit": "yarn lint",
-    "pre-push": "yarn lint"
+    "pre-build": "npm run build-bundle",
+    "build-bundle": "esbuild src/bundle.ts --bundle --outfile=dist/dist.min.js"
   },
-  "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.14.5",
-    "@probe.gl/bench": "^4.0.1",
-    "@probe.gl/test-utils": "^4.0.1",
-    "@types/tape-promise": "^4.0.1",
-    "base64-inline-loader": "^1.1.1",
-    "base64-loader": "^1.0.0",
-    "coveralls": "^3.0.3",
-    "esbuild": "^0.13.13",
-    "ocular-dev-tools": "1.0.0-alpha.7",
-    "pre-commit": "^1.2.2",
-    "pre-push": "^0.1.1",
-    "ts-node": "^10.4.0"
+  "dependencies": {
+    "@loaders.gl/loader-utils": "3.4.0",
+    "@loaders.gl/math": "3.4.0",
+    "@math.gl/core": "^3.5.1",
+    "@math.gl/culling": "^3.5.1",
+    "@math.gl/geospatial": "^3.5.1",
+    "@math.gl/web-mercator": "^3.5.1",
+    "@probe.gl/stats": "^4.0.1"
   },
-  "pre-commit": "pre-commit",
-  "pre-push": "pre-push",
-  "dependencies": {},
-  "resolutions_notes": [
-    "Something triggers double luma.gl versions after deck.gl 8.9 upgrade",
-    "Note: tape 4.12 and higher no longer compares 0 and -0 equally...",
-    "Note: newer prettier breaks on typescript import type"
-  ],
-  "resolutions": {
-    "@luma.gl/core": "8.5.20",
-    "tape": "4.11.0",
-    "prettier": "2.3.1",
-    "typescript": "^5.0.4"
+  "peerDependencies": {
+    "@loaders.gl/core": "^3.4.0"
   },
-  "volta": {
-    "node": "16.19.1",
-    "yarn": "1.22.19"
-  }
+  "gitHead": "c95a4ff72512668a93d9041ce8636bac09333fd5"
 }

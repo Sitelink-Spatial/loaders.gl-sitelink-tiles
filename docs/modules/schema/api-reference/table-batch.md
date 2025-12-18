@@ -1,5 +1,0 @@
-# TableBatch
-
-- RowTableBatch
-- ColumnarTableBatch
-- ArrowTableBatch

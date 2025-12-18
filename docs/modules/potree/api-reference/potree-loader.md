@@ -1,3 +1,0 @@
-# PotreeLoader
-
-Work in progress

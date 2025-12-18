@@ -1,1 +1,0 @@
-`apache` and `apache-bad` folders copied from https://github.com/apache/parquet-testing under Apache 2 license
